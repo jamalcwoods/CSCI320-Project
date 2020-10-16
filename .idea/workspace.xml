@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34777596-e6dc-4e15-be47-7dc9960ff061" name="Default" comment="Successfully read information from user to add a chef">
+    <list default="true" id="34777596-e6dc-4e15-be47-7dc9960ff061" name="Default" comment="looped input and now testing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
@@ -93,13 +93,21 @@
       <option name="project" value="LOCAL" />
       <updated>1602865956005</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="looped input and now testing">
+      <created>1602869383290</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1602869383290</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Worked on reading input" />
     <MESSAGE value="Successfully read information from user to add a chef" />
-    <option name="LAST_COMMIT_MESSAGE" value="Successfully read information from user to add a chef" />
+    <MESSAGE value="looped input and now testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="looped input and now testing" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Project_Structure" timestamp="1602857318799">
@@ -110,10 +118,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="774" y="119" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602858852148" />
-    <state x="1036" y="119" key="CommitChangelistDialog2" timestamp="1602865953515">
+    <state x="1036" y="119" key="CommitChangelistDialog2" timestamp="1602869381704">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1036" y="119" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1602865953515" />
+    <state x="1036" y="119" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1602869381704" />
     <state width="1019" height="289" key="GridCell.Tab.0.bottom" timestamp="1602868916994">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -150,10 +158,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="95" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1602858276581" />
-    <state x="976" y="246" key="Vcs.Push.Dialog.v2" timestamp="1602865958829">
+    <state x="976" y="246" key="Vcs.Push.Dialog.v2" timestamp="1602869386492">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="976" y="246" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1602865958829" />
+    <state x="976" y="246" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1602869386492" />
     <state x="655" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1602857269284">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

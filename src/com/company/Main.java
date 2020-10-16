@@ -14,10 +14,10 @@ public class Main {
     public enum Tables{
         chef(new String[]{"chefemail", "chefname"}),
         chefmakesrecipe(new String[]{"chefemail", "recname", "datemade"}),
-        fridgestores(new String[]{"fridgeid", "ingname"}),
-        ingredient(new String[]{"ingname", "ingquant", "expdate", "needfridge"}),
+        fridgestores(new String[]{"fridgeid", "ingname", "fridgequant"}),
+        ingredient(new String[]{"ingname", "expdate", "needfridge", "unit"}),
         pantry(new String[]{"pantryid"}),
-        pantrystores(new String[]{"pantryid", "ingname"}),
+        pantrystores(new String[]{"pantryid", "ingname", "pantryquant"}),
         recipe(new String[]{"recname", "backstory", "maketime", "timesmade"}),
         recipeauthor(new String[]{"recname", "author"}),
         reciperequires(new String[]{"recname", "ingname", "quantreq"}),
