@@ -56,43 +56,73 @@ public class Main {
                     String query = "";
                     Tables table = null;
                     String s = "";
-                    String tablesAttributes = "";
-                    String inputAttributes = "";
-                    System.out.println("1.chef, \n2.chefmakesrecipe, \n3.fridgestores, \n4.ingredient, \n5.pantry, " +
-                            "\n6.pantrystores, \n7.recipe, " + "\n8.recipeauthor, \n9.reciperequires, \n10.refrigerator, " +
-                            "\n11.step, \n12.stepuses");
-                    while (table == null) { //gets which table and makes sure it exists
-                        System.out.println("What table would you like to add to?: ");
-                        s = in.nextLine();
-                        for (Tables tab : Tables.values()) {
-                            if (tab.name().equals(s)) {
-                                table = tab;
+                    System.out.println("Would you like to 1)add a new row to a table or 2)read from a table?: ");
+                    String option = in.nextLine();
+                    if (option.equals("1")) {
+                        //create a new row in a table
+                        String tablesAttributes = "";
+                        String inputAttributes = "";
+                        System.out.println("1.chef, \n2.chefmakesrecipe, \n3.fridgestores, \n4.ingredient, \n5.pantry, " +
+                                "\n6.pantrystores, \n7.recipe, " + "\n8.recipeauthor, \n9.reciperequires, \n10.refrigerator, " +
+                                "\n11.step, \n12.stepuses");
+                        while (table == null) { //gets which table and makes sure it exists
+                            System.out.println("What table would you like to add to?: ");
+                            s = in.nextLine();
+                            for (Tables tab : Tables.values()) {
+                                if (tab.name().equals(s)) {
+                                    table = tab;
+                                }
                             }
                         }
-                    }
-                    System.out.println("Table adding to is " + table);
-                    query = "insert into " + table + " (";
-                    String[] attributes = new String[table.attributes.length];
-                    for (int i = 0; i < table.attributes.length; i++) {
-                        System.out.println("Enter data for " + table.attributes[i] + ":");
-                        attributes[i] = in.nextLine();
-                        tablesAttributes += table.attributes[i] + ", ";
-                        inputAttributes += "'" + attributes[i] + "', ";
-                        System.out.println("entered: " + attributes[i]);
-                    }
-                    query += tablesAttributes.substring(0, tablesAttributes.length() - 2) + ") values (" + inputAttributes.substring(0, inputAttributes.length() - 2) + ")";
-                    System.out.println(query);
+                        System.out.println("Table adding to is " + table);
+                        query = "insert into " + table + " (";
+                        String[] attributes = new String[table.attributes.length];
+                        for (int i = 0; i < table.attributes.length; i++) {
+                            System.out.println("Enter data for " + table.attributes[i] + ":");
+                            attributes[i] = in.nextLine();
+                            tablesAttributes += table.attributes[i] + ", ";
+                            inputAttributes += "'" + attributes[i] + "', ";
+                            System.out.println("entered: " + attributes[i]);
+                        }
+                        query += tablesAttributes.substring(0, tablesAttributes.length() - 2) + ") values (" + inputAttributes.substring(0, inputAttributes.length() - 2) + ")";
+                        System.out.println(query);
 
-                    Statement stmt = con.createStatement();
-                    int rs = stmt.executeUpdate(query);
-                    //ResultSet rs = stmt.executeQuery("insert into Chef (chefemail, chefname) values ('bcook@gmail.com', 'bob')");
-                    //ResultSet rs = stmt.executeQuery("delete from Chef where chefemail='bcook@gmail.com'");
+                        Statement stmt = con.createStatement();
+                        int rs = stmt.executeUpdate(query);
+                        //ResultSet rs = stmt.executeQuery("insert into Chef (chefemail, chefname) values ('bcook@gmail.com', 'bob')");
+                        //ResultSet rs = stmt.executeQuery("delete from Chef where chefemail='bcook@gmail.com'");
 
-                    //while(rs.next()){
-                    //Date now = new Date(System.currentTimeMillis());
-                    // java.sql.Date sqlDate = new java.sql.Date(now.getTime());
-                    // System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));
-                    //}
+                        //while(rs.next()){
+                        //Date now = new Date(System.currentTimeMillis());
+                        // java.sql.Date sqlDate = new java.sql.Date(now.getTime());
+                        // System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));
+                        //}
+                    } else if (option.equals(2)) {
+                        //read a table
+                        System.out.println("1.chef, \n2.chefmakesrecipe, \n3.fridgestores, \n4.ingredient, \n5.pantry, " +
+                                "\n6.pantrystores, \n7.recipe, " + "\n8.recipeauthor, \n9.reciperequires, \n10.refrigerator, " +
+                                "\n11.step, \n12.stepuses");
+                        while (table == null) { //gets which table and makes sure it exists
+                            System.out.println("What table would you like to add to?: ");
+                            s = in.nextLine();
+                            for (Tables tab : Tables.values()) {
+                                if (tab.name().equals(s)) {
+                                    table = tab;
+                                }
+                            }
+                        }
+                        //start the query
+                        query = "select ";
+                        //add the attributes to the query
+                        for (int i = 0; i < table.attributes.length; i++) {
+                            query += table.attributes[i] + " ";
+                        }
+                        //finish the query
+                        query += "from " + table;
+                        Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery(query);
+                        //need to figure out how to print the data in the result set
+                    }
                     System.out.println("continue? (y/n):");
                     s = in.nextLine();
                     if(s.equals("n")){

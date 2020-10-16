@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34777596-e6dc-4e15-be47-7dc9960ff061" name="Default" comment="fixed Tables enum to fit units and quantity changes">
+    <list default="true" id="34777596-e6dc-4e15-be47-7dc9960ff061" name="Default" comment="Worked on reading input">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
@@ -23,6 +24,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectId" id="1ixlgnMVbmwoVISJ7xYwyLVt8rh" />
   <component name="ProjectViewState">
@@ -30,6 +32,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/postgresql-42.2.18.jar!/" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -86,36 +89,23 @@
       <option name="project" value="LOCAL" />
       <updated>1602864075900</updated>
     </task>
-    <task id="LOCAL-00002" summary="Successfully read information from user to add a chef">
-      <created>1602865956005</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1602865956005</updated>
-    </task>
-    <task id="LOCAL-00003" summary="looped input and now testing">
-      <created>1602869383290</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1602869383290</updated>
-    </task>
-    <task id="LOCAL-00004" summary="fixed Tables enum to fit units and quantity changes">
-      <created>1602870509068</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1602870509068</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Worked on reading input" />
-    <MESSAGE value="Successfully read information from user to add a chef" />
-    <MESSAGE value="looped input and now testing" />
-    <MESSAGE value="fixed Tables enum to fit units and quantity changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed Tables enum to fit units and quantity changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Worked on reading input" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Project_Structure" timestamp="1602857318799">
@@ -126,26 +116,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="774" y="119" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602858852148" />
-    <state x="1036" y="119" key="CommitChangelistDialog2" timestamp="1602874373299">
+    <state x="808" y="410" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1602868529782">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1036" y="119" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1602874373299" />
-    <state width="1019" height="289" key="GridCell.Tab.0.bottom" timestamp="1602873311406">
+    <state x="808" y="410" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1602868529782" />
+    <state x="1036" y="119" key="CommitChangelistDialog2" timestamp="1602864071597">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1019" height="289" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602873311406" />
-    <state width="1019" height="289" key="GridCell.Tab.0.center" timestamp="1602873311406">
+    <state x="1036" y="119" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1602864071597" />
+    <state width="1019" height="289" key="GridCell.Tab.0.bottom" timestamp="1602865828387">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1019" height="289" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602873311406" />
-    <state width="1019" height="289" key="GridCell.Tab.0.left" timestamp="1602873311406">
+    <state width="1019" height="289" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602865828387" />
+    <state width="1019" height="289" key="GridCell.Tab.0.center" timestamp="1602865828387">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1019" height="289" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602873311406" />
-    <state width="1019" height="289" key="GridCell.Tab.0.right" timestamp="1602873311406">
+    <state width="1019" height="289" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602865828387" />
+    <state width="1019" height="289" key="GridCell.Tab.0.left" timestamp="1602865828387">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1019" height="289" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602873311406" />
+    <state width="1019" height="289" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602865828387" />
+    <state width="1019" height="289" key="GridCell.Tab.0.right" timestamp="1602865828387">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1019" height="289" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602865828387" />
     <state width="1877" height="343" key="GridCell.Tab.1.bottom" timestamp="1602858586911">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -162,18 +156,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="343" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602858586911" />
+    <state x="672" y="237" key="MultipleFileMergeDialog" timestamp="1602877557197">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="672" y="237" key="MultipleFileMergeDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1602877557197" />
     <state x="440" y="95" key="SettingsEditor" timestamp="1602858276581">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="95" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1602858276581" />
-    <state x="976" y="246" key="Vcs.Push.Dialog.v2" timestamp="1602870511249">
+    <state x="976" y="246" key="Vcs.Push.Dialog.v2" timestamp="1602864083068">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="976" y="246" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1602870511249" />
+    <state x="976" y="246" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1602864083068" />
     <state x="655" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1602857269284">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="655" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602857269284" />
+    <state x="769" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1602877553358">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="769" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1602877553358" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602873573054">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1602873573054" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CSCI320_Project$Main.ic" NAME="Main Coverage Results" MODIFIED="1602858489906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
