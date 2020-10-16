@@ -122,6 +122,12 @@ public class Main {
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery(query);
                         //need to figure out how to print the data in the result set
+                        do {
+                            for (int i = 0; i < table.attributes.length; i++) {
+                                System.out.print(rs.getString(i) + "\t");
+                            }
+                            System.out.println();
+                        } while (rs.next());
                     }
                     System.out.println("continue? (y/n):");
                     s = in.nextLine();
