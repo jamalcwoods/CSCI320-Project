@@ -20,7 +20,28 @@ public class Main {
             test = reader.readLine();
         } while(test != "exit");
         */
+        String password = "rohng0iP7ma5ahgeisoo";
+        String user = "p320_22";
+        String url = "jdbc:postgresql://reddwarf.cs.rit.edu:5432/p320_22";
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection con = DriverManager.getConnection(url, user, password);
 
-        Connection con = DriverManager.getConnection();
+            if(con != null){
+                System.out.println("OK");
+            }
+
+            Statement stmt = con.createStatement();
+
+            ResultSet rs = stmt.executeQuery("insert into Chef (chefemail, chefname) values ('bcook@gmail.com', 'bob')");
+
+            while(rs.next()){
+                Date now = new Date(System.currentTimeMillis());
+                java.sql.Date sqlDate = new java.sql.Date(now.getTime());
+                System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
     }
 }
