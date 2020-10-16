@@ -13,27 +13,26 @@ public class Main {
 
     public enum Tables{
         chef(new String[]{"chefemail", "chefname"}),
-      //  chefmakesrecipe,
-       // fridgestores,
-       // ingriedient,
-        pantry(new String[]{"pantryid"});
-      //  pantrystores,
-      //  recipe,
-       // recipeauthor,
-       // reciperequires,
-       //refigerator,
-        //step,
-        //stepuses;
+        chefmakesrecipe(new String[]{"chefemail", "recname", "datemade"}),
+        fridgestores(new String[]{"fridgeid", "ingname"}),
+        ingredient(new String[]{"ingname", "ingquant", "expdate", "needfridge"}),
+        pantry(new String[]{"pantryid"}),
+        pantrystores(new String[]{"pantryid", "ingname"}),
+        recipe(new String[]{"recname", "backstory", "maketime", "timesmade"}),
+        recipeauthor(new String[]{"recname", "author"}),
+        reciperequires(new String[]{"recname", "ingname", "quantreq"}),
+        refigerator(new String[]{"fridgeid"}),
+        step(new String[]{"stepnumber", "recname", "directions"}),
+        stepuses(new String[]{"stepnumber", "ingname", "quantuse"});
 
         public String[] attributes;
 
-        private Tables(String[] attributes){
+        Tables(String[] attributes){
             this.attributes = attributes;
         }
-
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException { //TODO split up the main, make sure that forign keys exist when entering them, dont end program when something entered is wrong (need to go back)
         /*
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String test = reader.readLine();
@@ -52,53 +51,56 @@ public class Main {
 
             if(con != null) {
                 System.out.println("OK");
-
                 Scanner in = new Scanner(System.in);
-                String query = "";
-                Tables table = null;
-                String s = "";
-                System.out.println("1.chef, \n2.chefmakesrecipe, \n3.fridgestores, \n4.ingriedient, \n5.pantry, " +
-                        "\n6.pantrystores, \n7.recipe, " + "\n8.recipeauthor, \n9.reciperequires, \n10.refigerator, " +
-                        "\n11.step, \n12.stepuses");
-                while (table==null) { //gets which table and makes sure it exists
-                    System.out.println("What table would you like to add to?: ");
-                    s = in.nextLine();
-                    for (Tables tab : Tables.values()) {
-                        if (tab.name().equals(s)) {
-                            table = tab;
+                boolean cont = true;
+
+                while (cont){ //!s.equals("quit") && !s.equals("exit") && !s.equals("q") && !s.equals("back") && !s.equals("cancel")) {
+                    String query = "";
+                    Tables table = null;
+                    String s = "";
+                    String tablesAttributes = "";
+                    String inputAttributes = "";
+                    System.out.println("1.chef, \n2.chefmakesrecipe, \n3.fridgestores, \n4.ingredient, \n5.pantry, " +
+                            "\n6.pantrystores, \n7.recipe, " + "\n8.recipeauthor, \n9.reciperequires, \n10.refigerator, " +
+                            "\n11.step, \n12.stepuses");
+                    while (table == null) { //gets which table and makes sure it exists
+                        System.out.println("What table would you like to add to?: ");
+                        s = in.nextLine();
+                        for (Tables tab : Tables.values()) {
+                            if (tab.name().equals(s)) {
+                                table = tab;
+                            }
                         }
                     }
+                    System.out.println("Table adding to is " + table);
+                    query = "insert into " + table + " (";
+                    String[] attributes = new String[table.attributes.length];
+                    for (int i = 0; i < table.attributes.length; i++) {
+                        System.out.println("Enter data for " + table.attributes[i] + ":");
+                        attributes[i] = in.nextLine();
+                        tablesAttributes += table.attributes[i] + ", ";
+                        inputAttributes += "'" + attributes[i] + "', ";
+                        System.out.println("entered: " + attributes[i]);
+                    }
+                    query += tablesAttributes.substring(0, tablesAttributes.length() - 2) + ") values (" + inputAttributes.substring(0, inputAttributes.length() - 2) + ")";
+                    System.out.println(query);
+
+                    Statement stmt = con.createStatement();
+                    int rs = stmt.executeUpdate(query);
+                    //ResultSet rs = stmt.executeQuery("insert into Chef (chefemail, chefname) values ('bcook@gmail.com', 'bob')");
+                    //ResultSet rs = stmt.executeQuery("delete from Chef where chefemail='bcook@gmail.com'");
+
+                    //while(rs.next()){
+                    //Date now = new Date(System.currentTimeMillis());
+                    // java.sql.Date sqlDate = new java.sql.Date(now.getTime());
+                    // System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));
+                    //}
+                    System.out.println("continue? (y/n):");
+                    s = in.nextLine();
+                    if(s.equals("n")){
+                        cont = false;
+                    }
                 }
-                System.out.println("Table adding to is " + table);
-                query = "insert into " + table + " (";
-                String tablesAttributes = "";
-                String inputAttributes = "";
-                String[] attributes = new String[table.attributes.length];
-                for (int i = 0; i< table.attributes.length; i++){
-                    System.out.println("length is: " + table.attributes.length);
-                    System.out.println("Enter data for " + table.attributes[i] + ":");
-                    attributes[i] = in.nextLine();
-                    tablesAttributes += table.attributes[i] + ", ";
-                    inputAttributes += "'" + attributes[i] + "', ";
-                    System.out.println("entered: " + attributes[i]);
-                }
-                query += tablesAttributes.substring(0, tablesAttributes.length() - 2) + ") values (" + inputAttributes.substring(0, inputAttributes.length() - 2) + ")";
-                System.out.println(query);
-
-                //while (!s.equals("quit") && !s.equals("exit") && !s.equals("q") && !s.equals("back") && !s.equals("cancel")) {
-                   // s = in.nextLine();
-                //}
-
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery(query);
-                //ResultSet rs = stmt.executeQuery("insert into Chef (chefemail, chefname) values ('bcook@gmail.com', 'bob')");
-                //ResultSet rs = stmt.executeQuery("delete from Chef where chefemail='bcook@gmail.com'");
-
-                //while(rs.next()){
-                //Date now = new Date(System.currentTimeMillis());
-                // java.sql.Date sqlDate = new java.sql.Date(now.getTime());
-                // System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));
-                //}
             }
         } catch (Exception e){
             System.out.println(e);
