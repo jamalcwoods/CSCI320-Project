@@ -103,7 +103,7 @@ public class Main {
                                 "\n6.pantrystores, \n7.recipe, " + "\n8.recipeauthor, \n9.reciperequires, \n10.refrigerator, " +
                                 "\n11.step, \n12.stepuses");
                         while (table == null) { //gets which table and makes sure it exists
-                            System.out.println("What table would you like to add to?: ");
+                            System.out.println("From which table would you like to read the data?: ");
                             s = in.nextLine();
                             for (Tables tab : Tables.values()) {
                                 if (tab.name().equals(s)) {
