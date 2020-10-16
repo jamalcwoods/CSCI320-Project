@@ -1,13 +1,11 @@
 package com.company;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.List;
 import java.util.Scanner;
-
 
 public class Main {
 
@@ -21,7 +19,7 @@ public class Main {
         recipe(new String[]{"recname", "backstory", "maketime", "timesmade"}),
         recipeauthor(new String[]{"recname", "author"}),
         reciperequires(new String[]{"recname", "ingname", "quantreq"}),
-        refigerator(new String[]{"fridgeid"}),
+        refrigerator(new String[]{"fridgeid"}),
         step(new String[]{"stepnumber", "recname", "directions"}),
         stepuses(new String[]{"stepnumber", "ingname", "quantuse"});
 
@@ -54,14 +52,14 @@ public class Main {
                 Scanner in = new Scanner(System.in);
                 boolean cont = true;
 
-                while (cont){ //!s.equals("quit") && !s.equals("exit") && !s.equals("q") && !s.equals("back") && !s.equals("cancel")) {
+                while (cont){
                     String query = "";
                     Tables table = null;
                     String s = "";
                     String tablesAttributes = "";
                     String inputAttributes = "";
                     System.out.println("1.chef, \n2.chefmakesrecipe, \n3.fridgestores, \n4.ingredient, \n5.pantry, " +
-                            "\n6.pantrystores, \n7.recipe, " + "\n8.recipeauthor, \n9.reciperequires, \n10.refigerator, " +
+                            "\n6.pantrystores, \n7.recipe, " + "\n8.recipeauthor, \n9.reciperequires, \n10.refrigerator, " +
                             "\n11.step, \n12.stepuses");
                     while (table == null) { //gets which table and makes sure it exists
                         System.out.println("What table would you like to add to?: ");
