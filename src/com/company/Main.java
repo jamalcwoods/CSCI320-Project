@@ -75,7 +75,7 @@ public class Main {
                             }
                         }
                         System.out.println("Table adding to is " + table);
-                        query = "insert into " + table + " (";
+                        query = "inserted into " + table + " (";
                         String[] attributes = new String[table.attributes.length];
                         for (int i = 0; i < table.attributes.length; i++) {
                             System.out.println("Enter data for " + table.attributes[i] + ":");
@@ -97,7 +97,7 @@ public class Main {
                         // java.sql.Date sqlDate = new java.sql.Date(now.getTime());
                         // System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));
                         //}
-                    } else if (option.equals(2)) {
+                    } else if (option.equals("2")) { // 2 changed to "2"
                         //read a table
                         System.out.println("1.chef, \n2.chefmakesrecipe, \n3.fridgestores, \n4.ingredient, \n5.pantry, " +
                                 "\n6.pantrystores, \n7.recipe, " + "\n8.recipeauthor, \n9.reciperequires, \n10.refrigerator, " +
