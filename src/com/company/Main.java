@@ -56,7 +56,7 @@ public class Main {
                     String query = "";
                     Tables table = null;
                     String s = "";
-                    System.out.println("Would you like to 1)add a new row to a table or 2)read from a table?: ");
+                    System.out.println("Would you like to 1)add a new row to a table 2)read from a table? or 3)perform an action: ");
                     String option = in.nextLine();
                     if (option.equals("1")) {
                         //create a new row in a table
@@ -97,7 +97,7 @@ public class Main {
                         // java.sql.Date sqlDate = new java.sql.Date(now.getTime());
                         // System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));
                         //}
-                    } else if (option.equals("2")) { // 2 changed to "2"
+                    } else if (option.equals("2")) {
                         //read a table
                         System.out.println("1.chef, \n2.chefmakesrecipe, \n3.fridgestores, \n4.ingredient, \n5.pantry, " +
                                 "\n6.pantrystores, \n7.recipe, " + "\n8.recipeauthor, \n9.reciperequires, \n10.refrigerator, " +
@@ -132,6 +132,26 @@ public class Main {
                                 System.out.print(rs.getString(i) + "\t");
                             }
                             System.out.println();
+                        }
+                    } else if (option.equals("3")) {
+                        String action = "";
+                        System.out.println("Perform one of the following actions:");
+                        System.out.println("0)Cancel, 1)Add and ingredient, 2)Add a recipe, 3)Make a recipe");
+                        System.out.println("4)View ingredients, 5)View recipes, 6)View dishes made");
+                        action = in.nextLine();
+                        switch (action) {
+                            case "1": //code for add ingredient here
+                                break;
+                            case "2": //code for add recipe here
+                                break;
+                            case "3": //code for make recipe here
+                                break;
+                            case "4": //code for view ingredients here
+                                break;
+                            case "5": //code for view recipes here
+                                break;
+                            case "6": //code for view dishes made here
+                                break;
                         }
                     }
                     System.out.println("continue? (y/n):");
