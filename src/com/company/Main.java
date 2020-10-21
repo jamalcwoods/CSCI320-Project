@@ -136,7 +136,7 @@ public class Main {
                     } else if (option.equals("3")) {
                         String action = "";
                         System.out.println("Perform one of the following actions:");
-                        System.out.println("0)Cancel, 1)Add and ingredient, 2)Add a recipe, 3)Make a recipe");
+                        System.out.println("0)Cancel, 1)Add an ingredient, 2)Add a recipe, 3)Make a recipe");
                         System.out.println("4)View ingredients, 5)View recipes, 6)View dishes made");
                         action = in.nextLine();
                         switch (action) {
