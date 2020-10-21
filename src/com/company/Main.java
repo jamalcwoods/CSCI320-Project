@@ -111,7 +111,8 @@ public class Main {
                                 }
                             }
                         }
-                        /*
+                        /* -- this code is not getting all of the columns in the result set
+                              even though the queries look correct
                         //start the query
                         query = "select ";
                         //add the attributes to the query
@@ -122,7 +123,7 @@ public class Main {
                         query += "from " + table;
                          */
                         query = "SELECT * FROM " + table;
-                        System.out.println("Query: " + query);
+                        //System.out.println("Query: " + query);
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery(query);
                         //need to figure out how to print the data in the result set
