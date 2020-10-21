@@ -111,6 +111,7 @@ public class Main {
                                 }
                             }
                         }
+                        /*
                         //start the query
                         query = "select ";
                         //add the attributes to the query
@@ -119,6 +120,9 @@ public class Main {
                         }
                         //finish the query
                         query += "from " + table;
+                         */
+                        query = "SELECT * FROM " + table;
+                        System.out.println("Query: " + query);
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery(query);
                         //need to figure out how to print the data in the result set

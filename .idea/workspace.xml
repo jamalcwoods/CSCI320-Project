@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34777596-e6dc-4e15-be47-7dc9960ff061" name="Default" comment="Minor text change">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="34777596-e6dc-4e15-be47-7dc9960ff061" name="Default" comment="some changes to the printing, still working with a bug where the result set is missing columns">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
@@ -110,7 +109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602880858016</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="some changes to the printing, still working with a bug where the result set is missing columns">
+      <created>1603322356968</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1603322356968</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -131,7 +137,8 @@
     <MESSAGE value="Wrote some code to query for data - data returned in result set but need to figure out how to print the data to the terminal" />
     <MESSAGE value="Added the code to print the resultset whe querying for data" />
     <MESSAGE value="Minor text change" />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor text change" />
+    <MESSAGE value="some changes to the printing, still working with a bug where the result set is missing columns" />
+    <option name="LAST_COMMIT_MESSAGE" value="some changes to the printing, still working with a bug where the result set is missing columns" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Project_Structure" timestamp="1603321345789">
@@ -148,30 +155,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="808" y="410" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1602868529782" />
-    <state x="613" y="119" key="CommitChangelistDialog2" timestamp="1602880857358">
+    <state x="613" y="119" key="CommitChangelistDialog2" timestamp="1603322356328">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="613" y="119" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1602880857358" />
+    <state x="613" y="119" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603322356328" />
     <state x="1036" y="119" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1602864071597" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1603322279110">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1603322750567">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603322279110" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603322750567" />
     <state width="1019" height="289" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602865828387" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1603322279110">
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1603322750567">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603322279110" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603322750567" />
     <state width="1019" height="289" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602865828387" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1603322279110">
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1603322750567">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603322279110" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603322750567" />
     <state width="1019" height="289" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602865828387" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1603322279110">
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1603322750567">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603322279110" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603322750567" />
     <state width="1019" height="289" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602865828387" />
     <state width="1877" height="343" key="GridCell.Tab.1.bottom" timestamp="1602858586911">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -198,10 +205,10 @@
     </state>
     <state x="440" y="95" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603321630986" />
     <state x="440" y="95" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1602858276581" />
-    <state x="976" y="246" key="Vcs.Push.Dialog.v2" timestamp="1602880860104">
+    <state x="976" y="246" key="Vcs.Push.Dialog.v2" timestamp="1603322358800">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="976" y="246" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1602880860104" />
+    <state x="976" y="246" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603322358800" />
     <state x="976" y="246" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1602864083068" />
     <state x="655" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1602857269284">
       <screen x="0" y="0" width="1920" height="1040" />
