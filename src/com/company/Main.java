@@ -75,7 +75,7 @@ public class Main {
                             }
                         }
                         System.out.println("Table adding to is " + table);
-                        query = "inserted into " + table + " (";
+                        query = "insert into " + table + " (";
                         String[] attributes = new String[table.attributes.length];
                         for (int i = 0; i < table.attributes.length; i++) {
                             System.out.println("Enter data for " + table.attributes[i] + ":");
@@ -126,7 +126,6 @@ public class Main {
                         //System.out.println("Query: " + query);
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery(query);
-                        //need to figure out how to print the data in the result set
                         while (rs.next()) {
                             for (int i = 1; i <= table.attributes.length; i++) {
                                 System.out.print(rs.getString(i) + "\t");
@@ -139,8 +138,43 @@ public class Main {
                         System.out.println("0)Cancel, 1)Add and ingredient, 2)Add a recipe, 3)Make a recipe");
                         System.out.println("4)View ingredients, 5)View recipes, 6)View dishes made");
                         action = in.nextLine();
+                        int rs;
+                        Statement stmt;
                         switch (action) {
-                            case "1": //code for add ingredient here
+                            case "1": //create a new ingredient and put it in the pantry/fridge
+                                System.out.print("What is the name of the ingredient?:");
+                                String iName = in.nextLine();
+                                System.out.print("In what format of units are you adding the ingredient?:");
+                                String unit = in.nextLine();
+                                System.out.print("How many of this ingredient are you adding?:");
+                                String iQuant = in.nextLine();
+                                System.out.print("Where is this ingredient going to be stored?");
+                                String iLoc = in.nextLine();
+                                while (!(iLoc.toUpperCase().equals("FRIDGE")||iLoc.toUpperCase().equals("REFRIDGERATOR")||iLoc.toUpperCase().equals("PANTRY"))) {
+                                    System.out.println("Valid locations are 'fridge' and 'pantry'");
+                                    System.out.print("Where is this ingredient going to be stored?");
+                                    iLoc = in.nextLine();
+                                }
+                                System.out.print("When does this ingredient expire?:");
+                                String iExpDate = in.nextLine();
+                                String needFridge = "";
+                                if (!iLoc.toUpperCase().equals("PANTRY")) needFridge = "yes";
+                                else needFridge = "no";
+
+                                //add the ingredient to table
+                                query = "insert into ingredient (ingname, expdate, needfridge, unit) values (" +
+                                        iName + "," + iExpDate + "," + needFridge + "," + unit + ")";
+                                System.out.println("Adding ingredient (" + iName + "," + iExpDate + "," + needFridge + "," + unit + ") to ingredient table");
+                                stmt = con.createStatement();
+                                rs = stmt.executeUpdate(query);
+
+                                //add the storing relation to the appropriate table
+                                //store in pantry/fridge 0 by default
+                                query = "insert into " + iLoc + "stores (" + iLoc + "id, ingname, " + iLoc + "quant) values (0," +
+                                        iName + "," + iQuant + ")";
+                                System.out.println("Adding relation (0," + iName + "," + iQuant + ") to " + iLoc + "stores table");
+                                stmt = con.createStatement();
+                                rs = stmt.executeUpdate(query);
                                 break;
                             case "2": //code for add recipe here
                                 break;
