@@ -14,18 +14,35 @@ public class Recipe {
         try {
             Statement stmt = con.createStatement();
             ResultSet rs;
+            Integer r;
             String query = "";
             Integer hours = (int)(Math.ceil(duration/60));
             Integer minutes = duration % 60;
+            String minutesString;
+            String hoursString;
+            if(minutes < 10){
+                minutesString = "0" + minutes;
+            } else {
+                minutesString = minutes.toString();
+            }
+            if(hours < 10){
+                hoursString = "0" + hours;
+            } else {
+                hoursString = hours.toString();
+            }
 
 
-            query = "insert into recipe (recname,backstory,maketime,timesmade) values ('"+ name + "','" + backstory + "','" + hours.toString() +":" + minutes.toString() + ":00',0)";
+            query = "insert into recipe (recname,backstory,maketime,timesmade) values ('"+ name + "','" + backstory + "','" + hoursString +":" + minutesString + ":00',0)";
             stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
+            r = stmt.executeUpdate(query);
+
+            query = "insert into recipeauthor (recname,author) values ('"+ name + "','" + author + "')";
+            stmt = con.createStatement();
+            r = stmt.executeUpdate(query);
             for (int i = 0; i < steps.length; i++) {
                 query = "insert into step (recname,stepnumber,directions) values ('"+ name + "'," + (i+1) + ",'" + steps[i].directions + "')";
                 stmt = con.createStatement();
-                rs = stmt.executeQuery(query);
+                r = stmt.executeUpdate(query);
                 if(steps[i].ingRequirements != null){
                     for (int j = 0; j < steps[i].ingRequirements.length; j++) {
                         IngredientReq ir = steps[i].ingRequirements[j];
@@ -43,7 +60,7 @@ public class Recipe {
                         }
                         query = "insert into stepuses (recname,stepnumber,ingname,quantuse) values ('" + name + "'," + (i + 1) + ",'" + ir.name + "'," + ir.quantity +")";
                         stmt = con.createStatement();
-                        rs = stmt.executeQuery(query);
+                        r = stmt.executeUpdate(query);
                     }
                 }
             }

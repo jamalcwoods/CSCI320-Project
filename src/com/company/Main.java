@@ -225,7 +225,7 @@ public class Main {
                                     }
                                     String iName = rs.getString(1);
                                     //get the total quantity in all pantries/fridges
-                                    query = "SELECT SUM(quantity) AS total FROM " + location + "stores WHERE ingname = '" + iName + "'";
+                                    query = "SELECT SUM(" + location +"quant) AS total FROM " + location + "stores WHERE ingname = '" + iName + "'";
                                     Statement stmt1 = con.createStatement();
                                     ResultSet rs1 = stmt1.executeQuery(query);
                                     rs1.next();
@@ -251,7 +251,7 @@ public class Main {
                                 } while (!recNames.contains(rec));
 
                                 //print the recipe information
-                                query = "SELECT * FROM recipe WHERE recname = " + rec;
+                                query = "SELECT * FROM recipe WHERE recname = '" + rec + "'";
                                 stmt = con.createStatement();
                                 rs = stmt.executeQuery(query);
                                 rs.next();
@@ -260,8 +260,8 @@ public class Main {
                                 }
 
                                 //get all of the required ingredients
-                                System.out.println("Ingredients:");
-                                query = "SELECT ingname, quantrec FROM reciperequires WHERE recname =" + rec;
+                                System.out.println("\nIngredients:");
+                                query = "SELECT ingname,quantrec FROM reciperequires WHERE recname ='" + rec +"'";
                                 stmt = con.createStatement();
                                 rs = stmt.executeQuery(query);
                                 while (rs.next()) {
@@ -270,7 +270,7 @@ public class Main {
 
                                 //get all of the steps
                                 System.out.println("Steps:");
-                                query = "SELECT stepnumber, directions FROM step WHERE recname =" + rec;
+                                query = "SELECT stepnumber,directions FROM step WHERE recname ='" + rec + "'";
                                 stmt = con.createStatement();
                                 rs = stmt.executeQuery(query);
                                 while (rs.next()) {
