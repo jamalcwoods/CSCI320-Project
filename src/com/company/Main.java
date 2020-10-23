@@ -21,7 +21,7 @@ public class Main {
         reciperequires(new String[]{"recname", "ingname", "quantreq"}),
         refrigerator(new String[]{"fridgeid"}),
         step(new String[]{"stepnumber", "recname", "directions"}),
-        stepuses(new String[]{"stepnumber", "ingname", "quantuse"});
+        stepuses(new String[]{"recname","stepnumber", "ingname", "quantuse"});
 
         public String[] attributes;
 
