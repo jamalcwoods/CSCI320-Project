@@ -138,7 +138,7 @@ public class Main {
                         System.out.println("0)Cancel, 1)Add an ingredient, 2)Add a recipe, 3)Make a recipe");
                         System.out.println("4)View ingredients, 5)View recipes, 6)View dishes made");
                         action = in.nextLine();
-                        int rs;
+                        ResultSet rs;
                         Statement stmt;
                         switch (action) {
                             case "1": //create a new ingredient and put it in the pantry/fridge
@@ -146,7 +146,7 @@ public class Main {
                                 System.out.print("What is the name of the ingredient?:");
                                 newIngredient.name = in.nextLine();
                                 System.out.print("In what format of units are you adding the ingredient? (singular term):");
-                                newIngredi  ent.unit = in.nextLine();
+                                newIngredient.unit = in.nextLine();
                                 System.out.print("How many of this ingredient are you adding?:");
                                 newIngredient.quantity = Integer.parseInt(in.nextLine());
                                 System.out.print("Where is this ingredient going to be stored?");
@@ -182,7 +182,31 @@ public class Main {
                                 break;
                             case "3": //code for make recipe here
                                 break;
-                            case "4": //code for view ingredients here
+                            case "4": //get all of the ingredients from the ingredients table
+                                query = "SELECT * FROM ingredient";
+                                stmt = con.createStatement();
+                                rs = stmt.executeQuery(query);
+                                while (rs.next()) {
+                                    for (int i = 1; i <= Tables.ingredient.attributes.length; i++) {
+                                        System.out.print(rs.getString(i) + "\t");
+                                    }
+
+                                    //find the quantity of this ingredient that is on hand by searching the pantry/fridge stores tables
+                                    String needFridge = rs.getString(3).toUpperCase();
+                                    String location;
+                                    if (needFridge.equals("YES")) {
+                                        location = "fridge";
+                                    } else {
+                                        location = "pantry";
+                                    }
+                                    String iName = rs.getString(1);
+                                    //get the total quantity in all pantries/fridges
+                                    query = "SELECT SUM(quantity) AS total FROM " + location + "stores WHERE ingname = '" + iName + "'";
+                                    Statement stmt1 = con.createStatement();
+                                    ResultSet rs1 = stmt1.executeQuery(query);
+                                    rs1.next();
+                                    System.out.println(rs1.getString(1));
+                                }
                                 break;
                             case "5": //code for view recipes here
                                 break;
