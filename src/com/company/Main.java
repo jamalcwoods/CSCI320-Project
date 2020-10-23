@@ -90,6 +90,14 @@ public class Main {
 
                         Statement stmt = con.createStatement();
                         int rs = stmt.executeUpdate(query);
+
+                        if (table.name().equals("chefmakesrecipe")){
+                            query = "UPDATE recipe SET timesmade = (SELECT Count(*) FROM chefmakesrecipe WHERE recname = '" + attributes[1] + "')  WHERE recname = '" + attributes[1] + "'";
+                            System.out.println(query);
+                            Statement stmt2 = con.createStatement();
+                            int rs2 = stmt2.executeUpdate(query);
+
+                        }
                         //ResultSet rs = stmt.executeQuery("insert into Chef (chefemail, chefname) values ('bcook@gmail.com', 'bob')");
                         //ResultSet rs = stmt.executeQuery("delete from Chef where chefemail='bcook@gmail.com'");
 
