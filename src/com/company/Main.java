@@ -146,7 +146,7 @@ public class Main {
                                 System.out.print("What is the name of the ingredient?:");
                                 newIngredient.name = in.nextLine();
                                 System.out.print("In what format of units are you adding the ingredient? (singular term):");
-                                newIngredi  ent.unit = in.nextLine();
+                                newIngredient.unit = in.nextLine();
                                 System.out.print("How many of this ingredient are you adding?:");
                                 newIngredient.quantity = Integer.parseInt(in.nextLine());
                                 System.out.print("Where is this ingredient going to be stored?");
@@ -162,23 +162,38 @@ public class Main {
 
                                 break;
                             case "2": //code for add recipe here
+                                Recipe newRecipe = new Recipe();
                                 System.out.print("What is this a recipe for?:");
-                                String rName = in.nextLine();
+                                newRecipe.name = in.nextLine();
                                 System.out.print("Who is the creator of this recipe?:");
-                                String aName = in.nextLine();
+                                newRecipe.author = in.nextLine();
                                 System.out.print("What is the backstory of this recipe?:");
-                                String backstory = in.nextLine();
+                                newRecipe.backstory = in.nextLine();
                                 System.out.print("How many minutes does it take to make this recipe?:");
-                                String makeLength = in.nextLine();
+                                newRecipe.duration = Integer.parseInt(in.nextLine());
                                 System.out.print("How many different steps are required for this recipe?:");
-                                String stepCountString = in.nextLine();
-                                Integer stepCount = Integer.parseInt(stepCountString);
-                                Step[] steps;
+                                Integer stepCount = Integer.parseInt(in.nextLine());
+                                newRecipe.steps = new Step[stepCount];
                                 for (int i = 0; i < stepCount; i++) {
                                     Step newStep = new Step();
-                                    System.out.print("What are the instructions for this step?:");
-                                    String stepDirections = in.nextLine();
+                                    System.out.print("What are the instructions for step #" + (i+1) + "?:");
+                                    newStep.directions = in.nextLine();
+                                    System.out.print("How many different ingredients are required for step #" + (i+1) + "?:");
+                                    Integer ingredientCount = Integer.parseInt(in.nextLine());
+                                    newStep.ingRequirements = new IngredientReq[ingredientCount];
+                                    for (int x = 0; x < ingredientCount; x++) {
+                                        IngredientReq iReq = new IngredientReq();
+                                        System.out.print("What is the name of ingredient #" + (x+1) + "?:");
+                                        iReq.name = in.nextLine();
+                                        System.out.print("In what format of units does the step require the ingredient #" + (x+1) + "? (singular term):");
+                                        iReq.unit = in.nextLine();
+                                        System.out.print("How many of ingredient #" + (x+1) + " are you using in step #" + (i+1) + "?:");
+                                        iReq.quantity = Integer.parseInt(in.nextLine());
+                                        newStep.ingRequirements[x] = iReq;
+                                    }
+                                    newRecipe.steps[i] = newStep;
                                 }
+                                newRecipe.AddRecipe(con);
                                 break;
                             case "3": //code for make recipe here
                                 break;

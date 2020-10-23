@@ -17,7 +17,6 @@ public class Ingredient {
             else needFridge = "no";
 
             String query = "insert into ingredient (ingname, expdate, needfridge, unit) values ('" + name + "','" + expiration + "','" + needFridge + "','" + unit + "')";
-            System.out.println("Adding ingredient (" + name + "," + expiration + "," + needFridge + "," + unit + ") to ingredient table");
             Statement stmt;
             stmt = con.createStatement();
             int rs = stmt.executeUpdate(query);
@@ -25,9 +24,7 @@ public class Ingredient {
             //add the storing relation to the appropriate table
             //store in pantry/fridge 0 by default
 
-            query = "insert into " + location + "stores (" + location + "id, ingname, " + location + "quant) values ('6','" +
-                    name + "','" + quantity + "')";
-            System.out.println("Adding relation (6," + name + "," + quantity + ") to " + location + "stores table");
+            query = "insert into " + location + "stores (" + location + "id, ingname, " + location + "quant) values ('6','" + name + "','" + quantity + "')";
             stmt = con.createStatement();
             rs = stmt.executeUpdate(query);
         } catch (Exception e){
