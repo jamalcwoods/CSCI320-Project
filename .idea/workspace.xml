@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34777596-e6dc-4e15-be47-7dc9960ff061" name="Default" comment="Added function for a user-friendly method of adding ingredients">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="34777596-e6dc-4e15-be47-7dc9960ff061" name="Default" comment="Added function for getting list of ingredients with the total quantity stored of each ingredient">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
@@ -161,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603326607124</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added function for getting list of ingredients with the total quantity stored of each ingredient">
+      <created>1603480912955</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1603480912955</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -187,7 +193,8 @@
     <MESSAGE value="minor changes to text" />
     <MESSAGE value="Created framework for performing more complex and user friendly actions" />
     <MESSAGE value="Added function for a user-friendly method of adding ingredients" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added function for a user-friendly method of adding ingredients" />
+    <MESSAGE value="Added function for getting list of ingredients with the total quantity stored of each ingredient" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added function for getting list of ingredients with the total quantity stored of each ingredient" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Project_Structure" timestamp="1603321345789">
@@ -204,10 +211,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="808" y="410" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603479273916" />
-    <state x="613" y="119" key="CommitChangelistDialog2" timestamp="1603326606580">
+    <state x="613" y="119" key="CommitChangelistDialog2" timestamp="1603480912299">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="613" y="119" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603326606580" />
+    <state x="613" y="119" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603480912299" />
     <state x="1036" y="119" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1602864071597" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1603326683634">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -254,10 +261,10 @@
     </state>
     <state x="440" y="95" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603321630986" />
     <state x="440" y="95" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1602858276581" />
-    <state x="976" y="246" key="Vcs.Push.Dialog.v2" timestamp="1603326608402">
+    <state x="976" y="246" key="Vcs.Push.Dialog.v2" timestamp="1603480914606">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="976" y="246" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603326608402" />
+    <state x="976" y="246" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603480914606" />
     <state x="976" y="246" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1602864083068" />
     <state x="655" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1602857269284">
       <screen x="0" y="0" width="1920" height="1040" />

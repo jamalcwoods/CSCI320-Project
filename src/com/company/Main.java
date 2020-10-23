@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -209,6 +210,49 @@ public class Main {
                                 }
                                 break;
                             case "5": //code for view recipes here
+                                //print out all of the recipe names
+                                query = "SELECT recname FROM recipe";
+                                stmt = con.createStatement();
+                                rs = stmt.executeQuery(query);
+                                System.out.println("available recipes:");
+                                ArrayList<String> recNames = new ArrayList<>();
+                                while (rs.next()) {
+                                    String thisName = rs.getString(1);
+                                    System.out.println(thisName);
+                                    recNames.add(thisName);
+                                }
+                                String rec;
+                                do {
+                                    System.out.print("Which recipe would you like to view");
+                                    rec = in.nextLine();
+                                } while (!recNames.contains(rec));
+
+                                //print the recipe information
+                                query = "SELECT * FROM recipe WHERE recname = " + rec;
+                                stmt = con.createStatement();
+                                rs = stmt.executeQuery(query);
+                                rs.next();
+                                for (int i = 1; i <= Tables.recipe.attributes.length; i++) {
+                                    System.out.print(rs.getString(i) + "\t");
+                                }
+
+                                //get all of the required ingredients
+                                System.out.println("Ingredients:");
+                                query = "SELECT ingname, quantrec FROM reciperequires WHERE recname =" + rec;
+                                stmt = con.createStatement();
+                                rs = stmt.executeQuery(query);
+                                while (rs.next()) {
+                                    System.out.println(rs.getString(1) + "\t" + rs.getString(2));
+                                }
+
+                                //get all of the steps
+                                System.out.println("Steps:");
+                                query = "SELECT stepnumber, directions FROM step WHERE recname =" + rec;
+                                stmt = con.createStatement();
+                                rs = stmt.executeQuery(query);
+                                while (rs.next()) {
+                                    System.out.println(rs.getString(1) + "\t" + rs.getString(2));
+                                }
                                 break;
                             case "6": //code for view dishes made here
                                 break;
