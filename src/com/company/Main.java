@@ -142,41 +142,43 @@ public class Main {
                         Statement stmt;
                         switch (action) {
                             case "1": //create a new ingredient and put it in the pantry/fridge
+                                Ingredient newIngredient = new Ingredient();
                                 System.out.print("What is the name of the ingredient?:");
-                                String iName = in.nextLine();
-                                System.out.print("In what format of units are you adding the ingredient?:");
-                                String unit = in.nextLine();
+                                newIngredient.name = in.nextLine();
+                                System.out.print("In what format of units are you adding the ingredient? (singular term):");
+                                newIngredi  ent.unit = in.nextLine();
                                 System.out.print("How many of this ingredient are you adding?:");
-                                String iQuant = in.nextLine();
+                                newIngredient.quantity = Integer.parseInt(in.nextLine());
                                 System.out.print("Where is this ingredient going to be stored?");
-                                String iLoc = in.nextLine();
-                                while (!(iLoc.toUpperCase().equals("FRIDGE")||iLoc.toUpperCase().equals("REFRIDGERATOR")||iLoc.toUpperCase().equals("PANTRY"))) {
+                                newIngredient.location = in.nextLine();
+                                while (!(newIngredient.location.toUpperCase().equals("FRIDGE")||newIngredient.location.toUpperCase().equals("REFRIDGERATOR")||newIngredient.location.toUpperCase().equals("PANTRY"))) {
                                     System.out.println("Valid locations are 'fridge' and 'pantry'");
                                     System.out.print("Where is this ingredient going to be stored?");
-                                    iLoc = in.nextLine();
+                                    newIngredient.location = in.nextLine();
                                 }
-                                System.out.print("When does this ingredient expire?:");
-                                String iExpDate = in.nextLine();
-                                String needFridge = "";
-                                if (!iLoc.toUpperCase().equals("PANTRY")) needFridge = "yes";
-                                else needFridge = "no";
+                                System.out.print("When does this ingredient expire? (year-m-d):");
+                                newIngredient.expiration = in.nextLine();
+                                newIngredient.AddIngredient(con);
 
-                                //add the ingredient to table
-                                query = "insert into ingredient (ingname, expdate, needfridge, unit) values (" +
-                                        iName + "," + iExpDate + "," + needFridge + "," + unit + ")";
-                                System.out.println("Adding ingredient (" + iName + "," + iExpDate + "," + needFridge + "," + unit + ") to ingredient table");
-                                stmt = con.createStatement();
-                                rs = stmt.executeUpdate(query);
-
-                                //add the storing relation to the appropriate table
-                                //store in pantry/fridge 0 by default
-                                query = "insert into " + iLoc + "stores (" + iLoc + "id, ingname, " + iLoc + "quant) values (0," +
-                                        iName + "," + iQuant + ")";
-                                System.out.println("Adding relation (0," + iName + "," + iQuant + ") to " + iLoc + "stores table");
-                                stmt = con.createStatement();
-                                rs = stmt.executeUpdate(query);
                                 break;
                             case "2": //code for add recipe here
+                                System.out.print("What is this a recipe for?:");
+                                String rName = in.nextLine();
+                                System.out.print("Who is the creator of this recipe?:");
+                                String aName = in.nextLine();
+                                System.out.print("What is the backstory of this recipe?:");
+                                String backstory = in.nextLine();
+                                System.out.print("How many minutes does it take to make this recipe?:");
+                                String makeLength = in.nextLine();
+                                System.out.print("How many different steps are required for this recipe?:");
+                                String stepCountString = in.nextLine();
+                                Integer stepCount = Integer.parseInt(stepCountString);
+                                Step[] steps;
+                                for (int i = 0; i < stepCount; i++) {
+                                    Step newStep = new Step();
+                                    System.out.print("What are the instructions for this step?:");
+                                    String stepDirections = in.nextLine();
+                                }
                                 break;
                             case "3": //code for make recipe here
                                 break;
