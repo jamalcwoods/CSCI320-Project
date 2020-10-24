@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
@@ -205,6 +206,136 @@ public class Main {
                                 newRecipe.AddRecipe(con);
                                 break;
                             case "3": //code for make recipe here
+                                query = "SELECT recname FROM recipe";
+                                stmt = con.createStatement();
+                                rs = stmt.executeQuery(query);
+                                System.out.println("available recipes:");
+                                ArrayList<String> prepareRecNames = new ArrayList<>();
+                                while (rs.next()) {
+                                    String thisName = rs.getString(1);
+                                    System.out.println(thisName);
+                                    prepareRecNames.add(thisName);
+                                }
+                                String prepareRec;
+                                do {
+                                    System.out.print("Which recipe would you like to prepare");
+                                    prepareRec = in.nextLine();
+                                } while (!prepareRecNames.contains(prepareRec));
+                                Boolean canPrepare = true;
+
+                                query = "SELECT ingname,quantreq FROM reciperequires WHERE recname ='" + prepareRec +"'";
+                                stmt = con.createStatement();
+                                rs = stmt.executeQuery(query);
+                                while (rs.next()) {
+                                    Integer amountNeeded = Integer.parseInt(rs.getString(2));
+                                    String ing = rs.getString(1);
+
+                                    query = "SELECT * FROM ingredient WHERE ingname='" + ing + "'";
+                                    stmt = con.createStatement();
+                                    ResultSet rsin = stmt.executeQuery(query);
+                                    rsin.next();
+                                    int total = 0;
+                                    String needFridge = rsin.getString(3).toUpperCase();
+                                    if (needFridge.equals("F")) {
+                                        //get the total quantity in all pantries
+                                        query = "SELECT SUM(pantryquant) AS total FROM pantrystores WHERE ingname = '" + ing + "'";
+                                        Statement stmt1 = con.createStatement();
+                                        ResultSet rs1 = stmt1.executeQuery(query);
+                                        rs1.next();
+                                        if(rs1.getString(1) != null) {
+                                            total += Integer.parseInt(rs1.getString(1));
+                                        }
+                                    }
+                                    //get the total quantity in all fridges
+                                    query = "SELECT SUM(fridgequant) AS total FROM fridgestores WHERE ingname = '" + ing + "'";
+                                    Statement stmt1 = con.createStatement();
+                                    ResultSet rs1 = stmt1.executeQuery(query);
+                                    rs1.next();
+                                    if(rs1.getString(1) != null) {
+                                        total += Integer.parseInt(rs1.getString(1));
+                                    }
+
+                                    if(amountNeeded <= total){
+                                        System.out.println(ing + " requirement met (" + total + "/" + amountNeeded +")");
+                                    } else {
+                                        canPrepare = false;
+                                        System.out.println(ing + " requirement not met (" + total + "/" + amountNeeded +")");
+                                        break;
+                                    }
+                                }
+                                if(canPrepare) {
+                                    query = "SELECT ingname,quantreq FROM reciperequires WHERE recname ='" + prepareRec +"'";
+                                    stmt = con.createStatement();
+                                    rs = stmt.executeQuery(query);
+                                    while (rs.next()) {
+                                        int toRemove = Integer.parseInt(rs.getString(2));
+                                        String ing = rs.getString(1);
+
+                                        query = "SELECT * FROM ingredient WHERE ingname='" + ing + "'";
+                                        stmt = con.createStatement();
+                                        ResultSet rsin = stmt.executeQuery(query);
+                                        rsin.next();
+                                        String needFridge = rsin.getString(3).toUpperCase();
+                                        if (needFridge.equals("F")) {
+
+                                            query = "SELECT SUM(pantryquant) AS total FROM pantrystores WHERE ingname = '" + ing + "'";
+                                            Statement stmt1 = con.createStatement();
+                                            ResultSet rs1 = stmt1.executeQuery(query);
+                                            rs1.next();
+
+
+                                            //get the total quantity in all pantries
+                                            query = "update pantrystores set pantryquant = pantryquant - " + toRemove + " where ingname='" + ing + "'";
+                                            stmt = con.createStatement();
+                                            int rsc = stmt.executeUpdate(query);
+                                            toRemove -= Integer.parseInt(rs1.getString(1));
+
+                                        }
+                                        if(toRemove > 0) {
+                                            query = "SELECT SUM(fridgequant) AS total FROM fridgestores WHERE ingname = '" + ing + "'";
+                                            Statement stmt1 = con.createStatement();
+                                            ResultSet rs1 = stmt1.executeQuery(query);
+                                            rs1.next();
+                                            //get the total quantity in all fridges
+
+                                            query = "update fridgestores set fridgequant = fridgequant - " + toRemove + " where ingname='" + ing + "'";
+                                            stmt = con.createStatement();
+                                            int rsc = stmt.executeUpdate(query);
+                                        }
+                                    }
+
+                                    System.out.print("What is your email?:");
+                                    String chefEmail = in.nextLine();
+
+                                    Boolean hasAccount = false;
+                                    query = "SELECT chefemail FROM chef";
+                                    stmt = con.createStatement();
+                                    ResultSet rsC = stmt.executeQuery(query);
+                                    while (rsC.next()) {
+                                        if(rsC.getString(1).matches(chefEmail)){
+                                            hasAccount = true;
+                                        }
+                                    }
+
+                                    if(!hasAccount) {
+                                        System.out.print("What is your name?:");
+                                        String chefName = in.nextLine();
+
+                                        query = "insert into chef (chefemail,chefname) values ('" + chefEmail + "','" + chefName +"')";
+                                        stmt = con.createStatement();
+                                        int rsc = stmt.executeUpdate(query);
+                                    }
+
+                                    Calendar now = Calendar.getInstance();
+                                    query = "insert into chefmakesrecipe (chefemail,recname,datemade) values ('" + chefEmail + "','" + prepareRec +"','" + now.get(Calendar.YEAR) + "-" + now.get(Calendar.MONTH) +"-" + now.get(Calendar.DATE) + "')";
+                                    stmt = con.createStatement();
+                                    int rsc = stmt.executeUpdate(query);
+
+                                    query = "update recipe set timesmade = timesmade + 1 where recname='" + prepareRec + "'";
+                                    stmt = con.createStatement();
+                                    rsc = stmt.executeUpdate(query);
+                                    System.out.println(prepareRec + " created");
+                                }
                                 break;
                             case "4": //get all of the ingredients from the ingredients table
                                 query = "SELECT * FROM ingredient";
@@ -216,20 +347,30 @@ public class Main {
                                     }
 
                                     //find the quantity of this ingredient that is on hand by searching the pantry/fridge stores tables
+                                    int total = 0;
                                     String needFridge = rs.getString(3).toUpperCase();
-                                    String location;
-                                    if (needFridge.equals("YES")) {
-                                        location = "fridge";
-                                    } else {
-                                        location = "pantry";
+                                    if (needFridge.equals("F")) {
+                                        String iName = rs.getString(1);
+                                        //get the total quantity in all pantries
+                                        query = "SELECT SUM(pantryquant) AS total FROM pantrystores WHERE ingname = '" + iName + "'";
+                                        Statement stmt1 = con.createStatement();
+                                        ResultSet rs1 = stmt1.executeQuery(query);
+                                        rs1.next();
+                                        if(rs1.getString(1) != null) {
+                                            total += Integer.parseInt(rs1.getString(1));
+                                        }
                                     }
                                     String iName = rs.getString(1);
-                                    //get the total quantity in all pantries/fridges
-                                    query = "SELECT SUM(" + location +"quant) AS total FROM " + location + "stores WHERE ingname = '" + iName + "'";
+                                    //get the total quantity in all fridges
+                                    query = "SELECT SUM(fridgequant) AS total FROM fridgestores WHERE ingname = '" + iName + "'";
                                     Statement stmt1 = con.createStatement();
                                     ResultSet rs1 = stmt1.executeQuery(query);
+
                                     rs1.next();
-                                    System.out.println(rs1.getString(1));
+                                    if(rs1.getString(1) != null) {
+                                        total += Integer.parseInt(rs1.getString(1));
+                                    }
+                                    System.out.println(total);
                                 }
                                 break;
                             case "5": //code for view recipes here
@@ -261,7 +402,7 @@ public class Main {
 
                                 //get all of the required ingredients
                                 System.out.println("\nIngredients:");
-                                query = "SELECT ingname,quantrec FROM reciperequires WHERE recname ='" + rec +"'";
+                                query = "SELECT ingname,quantreq FROM reciperequires WHERE recname ='" + rec +"'";
                                 stmt = con.createStatement();
                                 rs = stmt.executeQuery(query);
                                 while (rs.next()) {
@@ -278,6 +419,15 @@ public class Main {
                                 }
                                 break;
                             case "6": //code for view dishes made here
+                                query = "SELECT * FROM chefmakesrecipe";
+                                stmt = con.createStatement();
+                                rs = stmt.executeQuery(query);
+                                while (rs.next()) {
+                                    for (int i = 1; i <= Tables.chefmakesrecipe.attributes.length; i++) {
+                                        System.out.print(rs.getString(i) + "\t");
+                                    }
+                                    System.out.println("");
+                                }
                                 break;
                         }
                     }

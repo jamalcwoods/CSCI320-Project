@@ -61,6 +61,10 @@ public class Recipe {
                         query = "insert into stepuses (recname,stepnumber,ingname,quantuse) values ('" + name + "'," + (i + 1) + ",'" + ir.name + "'," + ir.quantity +")";
                         stmt = con.createStatement();
                         r = stmt.executeUpdate(query);
+
+                        query = "insert into reciperequires (recname,ingname,quantreq) values ('" + name + "','" + ir.name + "'," + ir.quantity +")";
+                        stmt = con.createStatement();
+                        r = stmt.executeUpdate(query);
                     }
                 }
             }
