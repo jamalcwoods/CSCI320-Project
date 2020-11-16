@@ -15,8 +15,7 @@ public class Ingredient {
             String query = "SELECT * FROM ingredient WHERE ingname='" + name + "'";
             Statement stmt = con.createStatement();
             ResultSet rsin = stmt.executeQuery(query);
-            rsin.next();
-            if(rsin.getString(1) == null) {
+            if(!rsin.next()) {
                 String needFridge = "";
                 if (!location.toUpperCase().equals("PANTRY")) needFridge = "yes";
                 else needFridge = "no";

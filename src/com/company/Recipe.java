@@ -10,10 +10,8 @@ public class Recipe {
     Step[] steps;
 
     public void AddRecipe(Connection con){
-        System.out.println("Creating Recipe...");
         try {
             Statement stmt = con.createStatement();
-            ResultSet rs;
             Integer r;
             String query = "";
             Integer hours = (int)(Math.ceil(duration/60));
@@ -48,11 +46,10 @@ public class Recipe {
                         IngredientReq ir = steps[i].ingRequirements[j];
                         query = "select ingname from ingredient where ingname='" + ir.name + "'";
                         stmt = con.createStatement();
-                        rs = stmt.executeQuery(query);
+                        ResultSet rs = stmt.executeQuery(query);
                         Boolean newIng = true;
-                        while (rs.next()) {
+                        if (rs.next()) {
                             newIng = false;
-                            System.out.println(rs);
                         }
                         if (newIng) {
                             Ingredient newIngredient = ir.ToIngredient();

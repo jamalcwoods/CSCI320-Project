@@ -4,10 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -45,6 +42,8 @@ public class Main {
         String password = "rohng0iP7ma5ahgeisoo";
         String user = "p320_22";
         String url = "jdbc:postgresql://reddwarf.cs.rit.edu:5432/p320_22";
+        String currentEmail = "";
+        String currentName = "";
         try {
             Class.forName("org.postgresql.Driver");
             Connection con = DriverManager.getConnection(url, user, password);
@@ -58,7 +57,7 @@ public class Main {
                     String query = "";
                     Tables table = null;
                     String s = "";
-                    System.out.println("Would you like to 1)add a new row to a table 2)read from a table? or 3)perform an action: ");
+                    System.out.println("Would you like to:\n1)add a new row to a table\n2)read from a table\n3)perform an action");
                     String option = in.nextLine();
                     if (option.equals("1")) {
                         //create a new row in a table
@@ -143,13 +142,38 @@ public class Main {
                             System.out.println();
                         }
                     } else if (option.equals("3")) {
+                        System.out.print("What is your email?:");
+                        String chefEmail = in.nextLine();
+                        currentEmail = chefEmail;
+
+                        Boolean hasAccount = false;
+                        query = "SELECT chefemail,chefname FROM chef";
+                        Statement stmt = con.createStatement();
+                        ResultSet rsC = stmt.executeQuery(query);
+
+                        while (rsC.next()) {
+                            if(rsC.getString(1).matches(chefEmail)){
+                                hasAccount = true;
+                                currentName = rsC.getString(2);
+                            }
+                        }
+
+                        if(!hasAccount) {
+                            System.out.print("What is your name?:");
+                            String chefName = in.nextLine();
+                            currentName = chefName;
+                            query = "insert into chef (chefemail,chefname) values ('" + chefEmail + "','" + chefName +"')";
+                            stmt = con.createStatement();
+                            int rsc = stmt.executeUpdate(query);
+                        }
+                        System.out.println("Welcome " + currentName);
                         String action = "";
                         System.out.println("Perform one of the following actions:");
-                        System.out.println("0)Cancel, 1)Add an ingredient, 2)Add a recipe, 3)Make a recipe");
-                        System.out.println("4)View ingredients, 5)View recipes, 6)View dishes made");
+                        System.out.println("0)Exit\n1)Add an ingredient\n2)Add a recipe\n3)Make a recipe");
+                        System.out.println("4)View ingredients\n5)View recipes\n6)View dishes made");
+                        System.out.println("7)Recommend recipes\n8)Recommend ingredients to add\n9)View chef data");
                         action = in.nextLine();
                         ResultSet rs;
-                        Statement stmt;
                         switch (action) {
                             case "1": //create a new ingredient and put it in the pantry/fridge
                                 Ingredient newIngredient = new Ingredient();
@@ -221,20 +245,26 @@ public class Main {
                                     System.out.print("Which recipe would you like to prepare");
                                     prepareRec = in.nextLine();
                                 } while (!prepareRecNames.contains(prepareRec));
+
+                                float amountModifier = 0f;
+                                do {
+                                    System.out.print("How much of the recipe would you like to prepare?\n(0.5 for half, 2.0 for double, minimum amount is 0.5)");
+                                    amountModifier = Float.parseFloat(in.nextLine());
+                                } while (amountModifier < 0.5f);
                                 Boolean canPrepare = true;
 
                                 query = "SELECT ingname,quantreq FROM reciperequires WHERE recname ='" + prepareRec +"'";
                                 stmt = con.createStatement();
                                 rs = stmt.executeQuery(query);
                                 while (rs.next()) {
-                                    Integer amountNeeded = Integer.parseInt(rs.getString(2));
+                                    Float amountNeeded = Float.parseFloat(rs.getString(2)) * amountModifier;
                                     String ing = rs.getString(1);
 
                                     query = "SELECT * FROM ingredient WHERE ingname='" + ing + "'";
                                     stmt = con.createStatement();
                                     ResultSet rsin = stmt.executeQuery(query);
                                     rsin.next();
-                                    int total = 0;
+                                    Float total = 0f;
                                     String needFridge = rsin.getString(3).toUpperCase();
                                     if (needFridge.equals("F")) {
                                         //get the total quantity in all pantries
@@ -243,7 +273,7 @@ public class Main {
                                         ResultSet rs1 = stmt1.executeQuery(query);
                                         rs1.next();
                                         if(rs1.getString(1) != null) {
-                                            total += Integer.parseInt(rs1.getString(1));
+                                            total += Float.parseFloat(rs1.getString(1));
                                         }
                                     }
                                     //get the total quantity in all fridges
@@ -252,7 +282,7 @@ public class Main {
                                     ResultSet rs1 = stmt1.executeQuery(query);
                                     rs1.next();
                                     if(rs1.getString(1) != null) {
-                                        total += Integer.parseInt(rs1.getString(1));
+                                        total +=Float.parseFloat(rs1.getString(1));
                                     }
 
                                     if(amountNeeded <= total){
@@ -260,7 +290,6 @@ public class Main {
                                     } else {
                                         canPrepare = false;
                                         System.out.println(ing + " requirement not met (" + total + "/" + amountNeeded +")");
-                                        break;
                                     }
                                 }
                                 if(canPrepare) {
@@ -268,7 +297,7 @@ public class Main {
                                     stmt = con.createStatement();
                                     rs = stmt.executeQuery(query);
                                     while (rs.next()) {
-                                        int toRemove = Integer.parseInt(rs.getString(2));
+                                        Float toRemove = Float.parseFloat(rs.getString(2)) * amountModifier;
                                         String ing = rs.getString(1);
 
                                         query = "SELECT * FROM ingredient WHERE ingname='" + ing + "'";
@@ -288,7 +317,7 @@ public class Main {
                                             query = "update pantrystores set pantryquant = pantryquant - " + toRemove + " where ingname='" + ing + "'";
                                             stmt = con.createStatement();
                                             int rsc = stmt.executeUpdate(query);
-                                            toRemove -= Integer.parseInt(rs1.getString(1));
+                                            toRemove -= Float.parseFloat(rs1.getString(1));
 
                                         }
                                         if(toRemove > 0) {
@@ -304,30 +333,8 @@ public class Main {
                                         }
                                     }
 
-                                    System.out.print("What is your email?:");
-                                    String chefEmail = in.nextLine();
-
-                                    Boolean hasAccount = false;
-                                    query = "SELECT chefemail FROM chef";
-                                    stmt = con.createStatement();
-                                    ResultSet rsC = stmt.executeQuery(query);
-                                    while (rsC.next()) {
-                                        if(rsC.getString(1).matches(chefEmail)){
-                                            hasAccount = true;
-                                        }
-                                    }
-
-                                    if(!hasAccount) {
-                                        System.out.print("What is your name?:");
-                                        String chefName = in.nextLine();
-
-                                        query = "insert into chef (chefemail,chefname) values ('" + chefEmail + "','" + chefName +"')";
-                                        stmt = con.createStatement();
-                                        int rsc = stmt.executeUpdate(query);
-                                    }
-
                                     Calendar now = Calendar.getInstance();
-                                    query = "insert into chefmakesrecipe (chefemail,recname,datemade) values ('" + chefEmail + "','" + prepareRec +"','" + now.get(Calendar.YEAR) + "-" + now.get(Calendar.MONTH) +"-" + now.get(Calendar.DATE) + "')";
+                                    query = "insert into chefmakesrecipe (chefemail,recname,datemade,amountmod) values ('" + currentEmail + "','" + prepareRec +"','" + now.get(Calendar.YEAR) + "-" + now.get(Calendar.MONTH) +"-" + now.get(Calendar.DATE) + "'," + amountModifier + ")";
                                     stmt = con.createStatement();
                                     int rsc = stmt.executeUpdate(query);
 
@@ -429,9 +436,50 @@ public class Main {
                                     System.out.println("");
                                 }
                                 break;
+                            case "7":
+                                System.out.println("What would you like a recommendation based on?");
+                                System.out.println("0)Based on recipes completed by other chefs"+
+                                        "\n1)Based on ingredients in pantry" +
+                                        "\n2)Based on number of times recipes have been completed" +
+                                        "\n3)Based on specific ingreient" +
+                                        "\n4)Based on time needed to cook" +
+                                        "\n5)Based on steps in recipe");
+                                String choice = in.nextLine();
+                                switch(choice){
+                                    case "0":
+                                        query = "SELECT chefemail,recname FROM chefmakesrecipe";
+                                        stmt = con.createStatement();
+                                        rs = stmt.executeQuery(query);
+                                        HashSet<String[]> data = new HashSet<String[]>();
+                                        HashSet<String> userMade = new HashSet<String>();
+                                        HashSet<String> similarChef = new HashSet<String>();
+                                        HashSet<String> recommened = new HashSet<String>();
+                                        while (rs.next()) {
+                                            data.add(new String[]{rs.getString(1),rs.getString(2)});
+                                            if(rs.getString(1).matches(currentEmail)){
+                                                userMade.add(rs.getString(2));
+                                            }
+                                        }
+                                        for (String[] temp : data) {
+                                            if(userMade.contains(temp[1]) && !currentEmail.matches(temp[0])){
+                                                similarChef.add((temp[0]));
+                                            }
+                                        }
+                                        for (String[] temp : data) {
+                                            if(similarChef.contains(temp[0]) && !recommened.contains(temp[1]) && !userMade.contains(temp[1])){
+                                                recommened.add(temp[1]);
+                                            }
+                                        }
+                                        for(String temp : recommened){
+                                            System.out.println(temp);
+                                        }
+                                }
                         }
                     }
-                    System.out.println("continue? (y/n):");
+                    System.out.println("What would you like to do next?:" +
+                            "\n0)Preform another action " +
+                            "\n1)Exit Program" +
+                            "\n2)Exit To Menu");
                     s = in.nextLine();
                     if(s.equals("n")){
                         cont = false;
