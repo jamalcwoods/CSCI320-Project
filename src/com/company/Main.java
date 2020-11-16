@@ -10,7 +10,7 @@ public class Main {
 
     public enum Tables{
         chef(new String[]{"chefemail", "chefname"}),
-        chefmakesrecipe(new String[]{"chefemail", "recname", "datemade"}),
+        chefmakesrecipe(new String[]{"chefemail", "recname", "datemade", "amountmod"}),
         fridgestores(new String[]{"fridgeid", "ingname", "fridgequant"}),
         ingredient(new String[]{"ingname", "expdate", "needfridge", "unit"}),
         pantry(new String[]{"pantryid"}),
@@ -29,7 +29,7 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) throws IOException { //TODO split up the main, make sure that forign keys exist when entering them, dont end program when something entered is wrong (need to go back)
+    public static void main(String[] args) throws IOException {
         /*
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String test = reader.readLine();
@@ -92,7 +92,7 @@ public class Main {
                         int rs = stmt.executeUpdate(query);
 
                         if (table.name().equals("chefmakesrecipe")){
-                            query = "UPDATE recipe SET timesmade = (SELECT Count(*) FROM chefmakesrecipe WHERE recname = '" + attributes[1] + "')  WHERE recname = '" + attributes[1] + "'";
+                            query = "UPDATE recipe SET timesmade = (SELECT SUM(amountmod) FROM chefmakesrecipe WHERE recname = '" + attributes[1] + "')  WHERE recname = '" + attributes[1] + "'";
                             System.out.println(query);
                             Statement stmt2 = con.createStatement();
                             int rs2 = stmt2.executeUpdate(query);
